@@ -1,7 +1,7 @@
 import { createMemoryHistory } from 'history';
 import unload from 'unload';
 
-import { Router } from '.';
+import Router from './Router';
 
 class MockStorage {
   constructor() {

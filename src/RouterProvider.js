@@ -1,21 +1,49 @@
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
-import { router } from './Router';
+import Controller from './Router';
 
-const CrossTabRouter = ({ history, channel, storage }) => {
-  if (!router.initialized) {
-    router.init(history, channel, storage);
+const ClientControllerContext = React.createContext('clientController');
+
+class ClientControllerProvider extends Component {
+  static propTypes = {
+    history: PropTypes.shape({
+      push: PropTypes.func.isRequired,
+      location: PropTypes.shape({}).isRequired,
+    }).isRequired,
+    storage: PropTypes.shape({
+
+    }).isRequired,
+    channel: PropTypes.shape({
+      postMessage: PropTypes.func.isRequired,
+    }).isRequired,
+    children: PropTypes.node.isRequired,
   }
 
-  return null;
-};
+  constructor(props, context) {
+    super(props, context);
 
-CrossTabRouter.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
-    location: PropTypes.shape({}).isRequired,
-  }).isRequired,
-};
+    const { history, channel, storage } = props;
 
-export default withRouter(CrossTabRouter);
+    this.controller = new Controller(history, channel, storage);
+  }
+
+  render() {
+    const { children } = this.props;
+
+    return <ClientControllerContext.Provider value={this.controller}>{children}</ClientControllerContext.Provider>;
+  }
+}
+
+export function withClientController(TargetComponent) {
+  return function ClientControllerComponent(props) {
+    return (
+      <ClientControllerContext.Consumer>
+        {contextApi => <TargetComponent {...props} clientController={contextApi} />}
+      </ClientControllerContext.Consumer>
+    );
+  };
+}
+
+export default withRouter(ClientControllerProvider);

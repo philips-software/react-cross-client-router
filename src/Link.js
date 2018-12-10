@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
 
-import { router } from './Router';
+import { withClientController } from './RouterProvider';
 
-
-export default class CrossTabLink extends Component {
+class CrossTabLink extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
     to: PropTypes.string.isRequired,
+    controller: PropTypes.shape({
+      tabs: PropTypes.array.isRequired,
+    }).isRequired,
     targetTab: PropTypes.string,
   };
 
@@ -17,21 +18,21 @@ export default class CrossTabLink extends Component {
   };
 
   handleClick = e => {
-    const { targetTab, to } = this.props;
+    const { targetTab, to, controller } = this.props;
 
-    if (!router.tabs.includes(targetTab)) {
+    if (!controller.tabs.includes(targetTab)) {
       return;
     }
 
     // if that target already exists, don't open a new tab
     e.preventDefault();
 
-    if (targetTab === router.tabId) {
-      router.history.push(to);
+    if (targetTab === controller.tabId) {
+      controller.history.push(to);
       return;
     }
 
-    router.redirectTargetTab(targetTab, to);
+    controller.redirectTargetTab(targetTab, to);
   };
 
   render() {
@@ -39,11 +40,13 @@ export default class CrossTabLink extends Component {
 
     const scopedHref = `${to}?tabId=${targetTab}`;
     return (
-      <a href={scopedHref} target="_blank" rel="noopener noreferrer" onClick={this.handleClick}>
+      <a href={scopedHref} onClick={this.handleClick}>
         {children}
       </a>
     );
   }
 }
+
+export default withClientController(CrossTabLink);
 
 

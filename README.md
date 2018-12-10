@@ -25,7 +25,3 @@ class Example extends Component {
   }
 }
 ```
-
-## License
-
-MIT © [stam](https://github.com/stam)

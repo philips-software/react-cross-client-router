@@ -4,11 +4,14 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "broadcast-channel": "^2.1.8",
+    "history": "^4.7.2",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
+    "react-cross-client-router": "link:..",
     "react-dom": "^16.4.1",
-    "react-scripts": "^1.1.4",
-    "react-cross-client-router": "link:.."
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "^1.1.4"
   },
   "scripts": {
     "start": "react-scripts start",

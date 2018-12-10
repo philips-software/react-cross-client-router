@@ -7,7 +7,7 @@ class CrossTabLink extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
     to: PropTypes.string.isRequired,
-    controller: PropTypes.shape({
+    clientController: PropTypes.shape({
       tabs: PropTypes.array.isRequired,
     }).isRequired,
     targetTab: PropTypes.string,
@@ -18,21 +18,21 @@ class CrossTabLink extends Component {
   };
 
   handleClick = e => {
-    const { targetTab, to, controller } = this.props;
+    const { targetTab, to, clientController } = this.props;
 
-    if (!controller.tabs.includes(targetTab)) {
+    if (!clientController.tabs.includes(targetTab)) {
       return;
     }
 
     // if that target already exists, don't open a new tab
     e.preventDefault();
 
-    if (targetTab === controller.tabId) {
-      controller.history.push(to);
+    if (targetTab === clientController.tabId) {
+      clientController.history.push(to);
       return;
     }
 
-    controller.redirectTargetTab(targetTab, to);
+    clientController.redirectTargetTab(targetTab, to);
   };
 
   render() {
@@ -40,7 +40,7 @@ class CrossTabLink extends Component {
 
     const scopedHref = `${to}?tabId=${targetTab}`;
     return (
-      <a href={scopedHref} onClick={this.handleClick}>
+      <a href={scopedHref} target="_blank" rel="noopener noreferrer" onClick={this.handleClick}>
         {children}
       </a>
     );

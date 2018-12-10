@@ -5,12 +5,8 @@ const URL_PARAM = 'tabId';
 const LOCAL_STORAGE_KEY = 'react-cross-tab-router-tabId';
 
 export default class Router {
-  constructor() {
-    this.initialized = false;
+  constructor(history, channel, storage) {
     this.tabs = [];
-  }
-
-  init(history, channel, storage) {
     this.history = history;
     this.channel = channel;
     this.storage = storage;
@@ -18,7 +14,6 @@ export default class Router {
 
     this.register();
     unload.add(this.unregister.bind(this));
-    this.initialized = true;
   }
 
   handleMessage(rawMessage) {
@@ -31,11 +26,12 @@ export default class Router {
 
     const [type, body] = message;
 
+
     switch (type) {
       case constants.PROTO_JOIN: {
         const newRoomName = body;
         if (!this.tabs.includes(newRoomName)) {
-          this.tabs.push(newRoomName);
+          this.tabs = [...this.tabs, newRoomName];
         }
 
         if (newRoomName !== this.tabId) {
@@ -46,7 +42,7 @@ export default class Router {
       case constants.PROTO_ACK_JOIN: {
         const newRoomName = body;
         if (!this.tabs.includes(newRoomName)) {
-          this.tabs.push(newRoomName);
+          this.tabs = [...this.tabs, newRoomName];
         }
         break;
       }
@@ -59,16 +55,17 @@ export default class Router {
       }
 
       case constants.PROTO_OPEN:
-        if (body.targetTab !== this.tabId) {
-          break;
-        }
-        this.history.push(body.location);
+      if (body.targetTab !== this.tabId) {
         break;
+      }
+      this.history.push(body.location);
+      break;
 
       default: {
         console.error('Unknown message type', type); /* eslint-disable-line */
       }
     }
+    console.log('handleMessage', message, this.tabs);
   }
 
   acknowledgeJoin() {

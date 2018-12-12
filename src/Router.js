@@ -89,7 +89,8 @@ export default class Router {
     }
 
     this.tabId = tabId;
-    this.tabs.push(tabId);
+    this.tabs = [...this.tabs, tabId];
+    // this.tabs.push(tabId);
 
     this.storage.setItem(LOCAL_STORAGE_KEY, tabId);
     this.sendMessage([constants.PROTO_JOIN, tabId]);

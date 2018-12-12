@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { withClientController } from './RouterProvider';
+import { withClientController, ClientControllerContext } from './RouterProvider';
 
 class CrossTabLink extends Component {
   static propTypes = {
@@ -17,8 +17,11 @@ class CrossTabLink extends Component {
     targetTab: 'child',
   };
 
+  static contextType = ClientControllerContext;
+
   handleClick = e => {
-    const { targetTab, to, clientController } = this.props;
+    const { targetTab, to } = this.props;
+    const clientController = this.context;
 
     if (!clientController.tabs.includes(targetTab)) {
       return;
@@ -47,6 +50,6 @@ class CrossTabLink extends Component {
   }
 }
 
-export default withClientController(CrossTabLink);
+export default CrossTabLink;
 
 

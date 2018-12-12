@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom';
-import { withClientController, CrossLink } from 'react-cross-client-router'
+import { ClientControllerContext, CrossLink } from 'react-cross-client-router'
 
 const ListView = () => (
   <ul>
@@ -17,8 +17,9 @@ const DetailView = ({ match }) => (
 );
 
 class App extends Component {
+  static contextType = ClientControllerContext;
   render () {
-    const { clientController } = this.props;
+    const clientController = this.context;
     console.log('tabs', clientController.tabs);
     return (
       <div>
@@ -35,4 +36,4 @@ class App extends Component {
   }
 }
 
-export default withClientController(App);
+export default App;

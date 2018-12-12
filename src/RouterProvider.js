@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 
 import Controller from './Router';
 
-const ClientControllerContext = React.createContext('clientController');
+export const ClientControllerContext = React.createContext('clientController');
 
 class ClientControllerProvider extends Component {
   static propTypes = {

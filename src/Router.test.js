@@ -1,7 +1,7 @@
 import { createMemoryHistory } from 'history';
 import unload from 'unload';
 
-import Router from './Router';
+import Router from './ClientRouter';
 
 class MockStorage {
   constructor() {
@@ -46,8 +46,7 @@ describe('The Router', () => {
     });
     channel = new MockChannel();
     storage = new MockStorage();
-    router = new Router();
-    router.init(history, channel, storage);
+    router = new Router(history, channel, storage);
   });
   it('should find the tabId from the url', () => {
     expect(router.tabId).toBe(TAB_ID);
@@ -66,8 +65,7 @@ describe('The Router', () => {
       initialEntries: ['/henk'],
     });
     storage.setItem('react-cross-tab-router-tabId', 'asdf');
-    router = new Router();
-    router.init(history, channel, storage);
+    router = new Router(history, channel, storage);
 
     expect(router.tabId).toBe('asdf');
   });

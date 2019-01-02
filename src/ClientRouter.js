@@ -4,7 +4,7 @@ import * as constants from './constants';
 const URL_PARAM = 'tabId';
 const LOCAL_STORAGE_KEY = 'react-cross-tab-router-tabId';
 
-export default class Router {
+export default class ClientRouter {
   constructor(history, channel, storage) {
     this.tabs = [];
     this.history = history;
@@ -71,6 +71,8 @@ export default class Router {
       }
     }
   }
+
+  onUpdate() {}
 
   acknowledgeJoin() {
     this.sendMessage([constants.PROTO_ACK_JOIN, this.tabId]);

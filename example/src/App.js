@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom';
-import { ClientControllerContext, CrossLink } from 'react-cross-client-router'
+import { ClientStateContext, ClientLink } from 'react-cross-client-router'
 
 const ListView = () => (
   <ul>
 
-  <li><CrossLink to="/detail/1">Item 1</CrossLink></li>
-  <li><CrossLink to="/detail/2">Item 2</CrossLink></li>
-  <li><CrossLink to="/detail/3">Item 3</CrossLink></li>
-  <li><CrossLink to="/detail/4" targetTab="child-2">Item 4 in child2</CrossLink></li>
+  <li><ClientLink to="/detail/1">Item 1</ClientLink></li>
+  <li><ClientLink to="/detail/2">Item 2</ClientLink></li>
+  <li><ClientLink to="/detail/3">Item 3</ClientLink></li>
+  <li><ClientLink to="/detail/4" targetTab="child-2">Item 4 in child2</ClientLink></li>
   </ul>
 );
 
@@ -17,14 +17,14 @@ const DetailView = ({ match }) => (
 );
 
 class App extends Component {
-  static contextType = ClientControllerContext;
+  static contextType = ClientStateContext;
   render () {
-    const clientController = this.context;
+    const clientState = this.context;
     return (
       <div>
-        <p>{clientController.tabId}</p>
+        <p>{clientState.tabId}</p>
         <ul>
-          {clientController.tabs.map(tab => (
+          {clientState.tabs.map(tab => (
             <li key={tab}>{tab}</li>
           ))}
         </ul>

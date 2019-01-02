@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { ClientControllerContext } from './RouterProvider';
+import { ClientStateContext } from './ClientStateProvider';
 
-class CrossTabLink extends Component {
+class ClientLink extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
     to: PropTypes.string.isRequired,
-    clientController: PropTypes.shape({
+    clientState: PropTypes.shape({
       tabs: PropTypes.array.isRequired,
     }).isRequired,
     targetTab: PropTypes.string,
@@ -17,7 +17,7 @@ class CrossTabLink extends Component {
     targetTab: 'child',
   };
 
-  static contextType = ClientControllerContext;
+  static contextType = ClientStateContext;
 
   handleClick = e => {
     const { targetTab, to } = this.props;
@@ -50,6 +50,6 @@ class CrossTabLink extends Component {
   }
 }
 
-export default CrossTabLink;
+export default ClientLink;
 
 

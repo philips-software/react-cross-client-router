@@ -1,25 +1,23 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { withRouter } from "react-router-dom";
 
-import Controller from './Router';
+import Controller from "./Router";
 
-export const ClientControllerContext = React.createContext('clientController');
+export const ClientControllerContext = React.createContext("clientController");
 
 class ClientControllerProvider extends Component {
   static propTypes = {
     history: PropTypes.shape({
       push: PropTypes.func.isRequired,
-      location: PropTypes.shape({}).isRequired,
+      location: PropTypes.shape({}).isRequired
     }).isRequired,
-    storage: PropTypes.shape({
-
-    }).isRequired,
+    storage: PropTypes.shape({}).isRequired,
     channel: PropTypes.shape({
-      postMessage: PropTypes.func.isRequired,
+      postMessage: PropTypes.func.isRequired
     }).isRequired,
-    children: PropTypes.node.isRequired,
-  }
+    children: PropTypes.node.isRequired
+  };
 
   constructor(props, context) {
     super(props, context);
@@ -27,12 +25,26 @@ class ClientControllerProvider extends Component {
     const { history, channel, storage } = props;
 
     this.controller = new Controller(history, channel, storage);
+    this.controller.onUpdate = this.handleUpdate;
+
+    this.state = {
+      tabs: this.controller.tabs,
+      router: this.controller,
+    };
+  }
+
+  handleUpdate = () => {
+    this.setState({ tabs: this.controller.tabs });
   }
 
   render() {
     const { children } = this.props;
 
-    return <ClientControllerContext.Provider value={this.controller}>{children}</ClientControllerContext.Provider>;
+    return (
+      <ClientControllerContext.Provider value={this.state}>
+        {children}
+      </ClientControllerContext.Provider>
+    );
   }
 }
 
@@ -40,7 +52,9 @@ export function withClientController(TargetComponent) {
   return function ClientControllerComponent(props) {
     return (
       <ClientControllerContext.Consumer>
-        {contextApi => <TargetComponent {...props} clientController={contextApi} />}
+        {contextApi => (
+          <TargetComponent {...props} clientController={contextApi} />
+        )}
       </ClientControllerContext.Consumer>
     );
   };

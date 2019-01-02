@@ -32,6 +32,7 @@ export default class Router {
         const newRoomName = body;
         if (!this.tabs.includes(newRoomName)) {
           this.tabs = [...this.tabs, newRoomName];
+          this.onUpdate();
         }
 
         if (newRoomName !== this.tabId) {
@@ -43,6 +44,8 @@ export default class Router {
         const newRoomName = body;
         if (!this.tabs.includes(newRoomName)) {
           this.tabs = [...this.tabs, newRoomName];
+          this.onUpdate();
+
         }
         break;
       }
@@ -51,6 +54,8 @@ export default class Router {
         const targetRoomName = body;
         const tabIndex = this.tabs.indexOf(targetRoomName);
         this.tabs.splice(tabIndex, 1);
+        this.onUpdate();
+
         break;
       }
 
@@ -65,7 +70,6 @@ export default class Router {
         console.error('Unknown message type', type); /* eslint-disable-line */
       }
     }
-    console.log('handleMessage', message, this.tabs);
   }
 
   acknowledgeJoin() {

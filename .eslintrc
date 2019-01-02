@@ -18,6 +18,7 @@
         "peerDependencies": true
       }
     ],
-    "react/jsx-filename-extension": [false]
+    "react/jsx-filename-extension": [false],
+    "react/no-unused-state": [false]
   }
 }

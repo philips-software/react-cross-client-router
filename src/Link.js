@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { withClientController, ClientControllerContext } from './RouterProvider';
+import { ClientControllerContext } from './RouterProvider';
 
 class CrossTabLink extends Component {
   static propTypes = {
@@ -21,21 +21,21 @@ class CrossTabLink extends Component {
 
   handleClick = e => {
     const { targetTab, to } = this.props;
-    const clientController = this.context;
+    const { router } = this.context;
 
-    if (!clientController.tabs.includes(targetTab)) {
+    if (!router.tabs.includes(targetTab)) {
       return;
     }
 
     // if that target already exists, don't open a new tab
     e.preventDefault();
 
-    if (targetTab === clientController.tabId) {
-      clientController.history.push(to);
+    if (targetTab === router.tabId) {
+      router.history.push(to);
       return;
     }
 
-    clientController.redirectTargetTab(targetTab, to);
+    router.redirectTargetTab(targetTab, to);
   };
 
   render() {

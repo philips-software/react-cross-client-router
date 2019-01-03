@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom';
-import { ClientStateContext, ClientLink } from 'react-cross-client-router'
+import { ClientRouterContext, ClientLink } from 'react-cross-client-router'
 
 const ListView = () => (
   <ul>
@@ -17,14 +17,14 @@ const DetailView = ({ match }) => (
 );
 
 class App extends Component {
-  static contextType = ClientStateContext;
+  static contextType = ClientRouterContext;
   render () {
-    const clientState = this.context;
+    const clientRouter = this.context;
     return (
       <div>
-        <p>{clientState.tabId}</p>
+        <p>{clientRouter.tabId}</p>
         <ul>
-          {clientState.tabs.map(tab => (
+          {clientRouter.tabs.map(tab => (
             <li key={tab}>{tab}</li>
           ))}
         </ul>

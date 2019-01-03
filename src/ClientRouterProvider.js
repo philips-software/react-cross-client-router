@@ -4,9 +4,9 @@ import { withRouter } from "react-router-dom";
 
 import ClientRouter from "./ClientRouter";
 
-export const ClientStateContext = React.createContext("crossClientState");
+export const ClientRouterContext = React.createContext("crossClientRouter");
 
-class ClientStateProvider extends Component {
+class ClientRouterProvider extends Component {
   static propTypes = {
     history: PropTypes.shape({
       push: PropTypes.func.isRequired,
@@ -41,23 +41,23 @@ class ClientStateProvider extends Component {
     const { children } = this.props;
 
     return (
-      <ClientStateContext.Provider value={this.state}>
+      <ClientRouterContext.Provider value={this.state}>
         {children}
-      </ClientStateContext.Provider>
+      </ClientRouterContext.Provider>
     );
   }
 }
 
-export function withClientState(TargetComponent) {
-  return function ClientStateComponent(props) {
+export function withClientRouter(TargetComponent) {
+  return function ClientRouterComponent(props) {
     return (
-      <ClientStateContext.Consumer>
+      <ClientRouterContext.Consumer>
         {contextApi => (
-          <TargetComponent {...props} clientState={contextApi} />
+          <TargetComponent {...props} clientRouter={contextApi} />
         )}
-      </ClientStateContext.Consumer>
+      </ClientRouterContext.Consumer>
     );
   };
 }
 
-export default withRouter(ClientStateProvider);
+export default withRouter(ClientRouterProvider);

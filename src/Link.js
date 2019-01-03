@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { ClientStateContext } from './ClientStateProvider';
+import { ClientRouterContext } from './ClientRouterProvider';
 
 class ClientLink extends Component {
   static propTypes = {
@@ -17,7 +17,7 @@ class ClientLink extends Component {
     targetTab: 'child',
   };
 
-  static contextType = ClientStateContext;
+  static contextType = ClientRouterContext;
 
   handleClick = e => {
     const { targetTab, to } = this.props;

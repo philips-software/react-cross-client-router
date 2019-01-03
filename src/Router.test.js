@@ -46,10 +46,10 @@ describe('The Router', () => {
     });
     channel = new MockChannel();
     storage = new MockStorage();
-    router = new Router(history, channel, storage);
+    router = new Router({ history, channel, storage });
   });
   it('should find the tabId from the url', () => {
-    expect(router.tabId).toBe(TAB_ID);
+    expect(router.state.tabId).toBe(TAB_ID);
   });
 
   it('removes only that search param after registering', () => {
@@ -65,9 +65,9 @@ describe('The Router', () => {
       initialEntries: ['/henk'],
     });
     storage.setItem('react-cross-tab-router-tabId', 'asdf');
-    router = new Router(history, channel, storage);
+    router = new Router({ history, channel, storage });
 
-    expect(router.tabId).toBe('asdf');
+    expect(router.state.tabId).toBe('asdf');
   });
 
   it('should send a JOIN signal', () => {
@@ -81,13 +81,13 @@ describe('The Router', () => {
 
   it('should add a tabId to memory when encountering a JOIN', () => {
     channel.postMessage(JSON.stringify(['JOIN', 'newTab']));
-    expect(router.tabs).toContain('newTab');
+    expect(router.state.tabs).toContain('newTab');
   });
 
   it('remove a tabId from memory when encountering a LEAVE signal', () => {
     channel.postMessage(JSON.stringify(['JOIN', 'newTab']));
     channel.postMessage(JSON.stringify(['LEAVE', 'newTab']));
-    expect(router.tabs).not.toContain('newTab');
+    expect(router.state.tabs).not.toContain('newTab');
   });
 
   it('should redirect to a page when a OPEN signal is target to this tab', () => {
@@ -115,6 +115,6 @@ describe('The Router', () => {
 
   it('should add a tabId to memory when encountering an ACK_JOIN', () => {
     channel.postMessage(JSON.stringify(['ACK_JOIN', 'earlierOpenedTab']));
-    expect(router.tabs).toContain('earlierOpenedTab');
+    expect(router.state.tabs).toContain('earlierOpenedTab');
   });
 });

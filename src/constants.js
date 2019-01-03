@@ -1,4 +1,5 @@
-export const MASTER_NAME = 'parent';
+export const PARENT_NAME = 'parent';
+export const CHILD_NAME = 'child';
 
 export const PROTO_JOIN = 'JOIN';
 export const PROTO_ACK_JOIN = 'ACK_JOIN';

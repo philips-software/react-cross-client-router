@@ -108,7 +108,7 @@ export default class ClientRouter {
       // If we push to url.href, it will will append the full url as relative path.
       this.history.push(`${location.pathname}?${searchParams}`);
     } else {
-      tabId = this.storage.getItem(LOCAL_STORAGE_KEY) || constants.MASTER_NAME;
+      tabId = this.storage.getItem(LOCAL_STORAGE_KEY) || constants.PARENT_NAME;
     }
 
     this.set({

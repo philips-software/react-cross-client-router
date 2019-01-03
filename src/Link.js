@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { ClientRouterContext } from './ClientRouterProvider';
+import * as constants from './constants';
 
 class ClientLink extends Component {
   static propTypes = {
@@ -11,7 +12,7 @@ class ClientLink extends Component {
   };
 
   static defaultProps = {
-    targetTab: 'child',
+    targetTab: constants.CHILD_NAME,
   };
 
   static contextType = ClientRouterContext;

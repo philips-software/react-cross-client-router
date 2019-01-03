@@ -21,16 +21,16 @@ class ClientLink extends Component {
 
   handleClick = e => {
     const { targetTab, to } = this.props;
-    const { router } = this.context;
+    const { tabs, tabId, router } = this.context;
 
-    if (!router.tabs.includes(targetTab)) {
+    if (!tabs.includes(targetTab)) {
       return;
     }
 
     // if that target already exists, don't open a new tab
     e.preventDefault();
 
-    if (targetTab === router.tabId) {
+    if (targetTab === tabId) {
       router.history.push(to);
       return;
     }

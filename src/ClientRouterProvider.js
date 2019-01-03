@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 
@@ -22,27 +22,48 @@ class ClientRouterProvider extends Component {
   constructor(props, context) {
     super(props, context);
 
-    const { history, channel, storage } = props;
-
-    this.clientRouter = new ClientRouter(history, channel, storage);
-    this.clientRouter.onUpdate = this.handleUpdate;
+    // this.clientRouterRef = React.createRef();
 
     this.state = {
-      tabs: this.clientRouter.tabs,
-      router: this.clientRouter,
-    };
+      tabs: [],
+      tabId: null,
+    }
+
+    // const { history, channel, storage } = props;
+
+    // this.clientRouter = new ClientRouter(history, channel, storage);
+    // this.clientRouter.onUpdate = this.handleUpdate;
+
+    // this.state = {
+    //   tabs: this.clientRouter.tabs,
+    //   router: this.clientRouter,
+    // };
   }
 
-  handleUpdate = () => {
-    this.setState({ tabs: this.clientRouter.tabs });
+  handleChange = (state) => {
+    this.setState(state)
+  }
+
+  handleRef = (router) => {
+    this.setState({ router });
   }
 
   render() {
-    const { children } = this.props;
+    const { children, history, channel, storage } = this.props;
 
     return (
       <ClientRouterContext.Provider value={this.state}>
-        {children}
+        <Fragment>
+          <ClientRouter
+            history={history}
+            channel={channel}
+            storage={storage}
+            state={this.state}
+            onChange={this.handleChange}
+            ref={this.handleRef}
+          />
+          {children}
+        </Fragment>
       </ClientRouterContext.Provider>
     );
   }

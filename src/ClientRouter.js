@@ -1,36 +1,28 @@
 import unload from 'unload';
-import { Component } from 'react';
 import * as constants from './constants';
 
 const URL_PARAM = 'tabId';
 const LOCAL_STORAGE_KEY = 'react-cross-tab-router-tabId';
 
-export default class ClientRouter extends Component {
-  // constructor(history, channel, storage) {
-  //   this.tabs = [];
-  //   this.history = history;
-  //   this.channel = channel;
-  //   this.storage = storage;
-  //   this.channel.onmessage = this.handleMessage.bind(this);
-
-  //   this.register();
-  //   unload.add(this.unregister.bind(this));
-  // }
-
-  componentDidMount() {
-    const { history, channel, storage } = this.props;
+export default class ClientRouter {
+  constructor({ history, channel, storage, onChange }) {
+    this.state = {
+      tabId: null,
+      tabs: [],
+    }
 
     this.history = history;
     this.channel = channel;
     this.storage = storage;
+    this.onChange = onChange;
     this.channel.onmessage = this.handleMessage.bind(this);
-    this.register();
 
+    this.register();
     unload.add(this.unregister.bind(this));
   }
 
-  componentWillUnmount() {
-    this.unregister();
+  setChangeListener(changeListener) {
+    this.onChange = changeListener;
   }
 
   handleMessage(rawMessage) {
@@ -41,7 +33,7 @@ export default class ClientRouter extends Component {
       message = rawMessage;
     }
 
-    const { tabs, tabId } = this.props.state;
+    const { tabs, tabId } = this.state;
     const [type, body] = message;
 
 
@@ -49,7 +41,9 @@ export default class ClientRouter extends Component {
       case constants.PROTO_JOIN: {
         const newRoomName = body;
         if (!tabs.includes(newRoomName)) {
-          this.set('tabs', [...tabs, newRoomName])
+          this.set({
+            tabs: [...tabs, newRoomName],
+          });
         }
 
         if (newRoomName !== tabId) {
@@ -60,7 +54,9 @@ export default class ClientRouter extends Component {
       case constants.PROTO_ACK_JOIN: {
         const newRoomName = body;
         if (!tabs.includes(newRoomName)) {
-          this.set('tabs', [...tabs, newRoomName])
+          this.set({
+            tabs: [...tabs, newRoomName]
+          });
         }
         break;
       }
@@ -68,7 +64,10 @@ export default class ClientRouter extends Component {
       case constants.PROTO_LEAVE: {
         const targetRoomName = body;
 
-        this.set('tabs',  tabs.filter((tab) => tab !== targetRoomName));
+        this.set({
+          tabs: tabs.filter((tab) => tab !== targetRoomName)
+        });
+
         break;
       }
 
@@ -85,12 +84,15 @@ export default class ClientRouter extends Component {
     }
   }
 
-  set = (key, val) => {
-    this.props.onChange({ [key]: val });
+  set = (newState) => {
+    this.state = { ...this.state, ...newState};
+    if (this.onChange) {
+      this.onChange(this.state);
+    }
   }
 
   acknowledgeJoin() {
-    this.sendMessage([constants.PROTO_ACK_JOIN, this.props.state.tabId]);
+    this.sendMessage([constants.PROTO_ACK_JOIN, this.state.tabId]);
   }
 
   register() {
@@ -109,9 +111,9 @@ export default class ClientRouter extends Component {
       tabId = this.storage.getItem(LOCAL_STORAGE_KEY) || constants.MASTER_NAME;
     }
 
-    this.props.onChange({
+    this.set({
       tabId,
-      tabs: [...this.props.state.tabs, tabId],
+      tabs: [...this.state.tabs, tabId],
     })
 
     this.storage.setItem(LOCAL_STORAGE_KEY, tabId);
@@ -119,7 +121,7 @@ export default class ClientRouter extends Component {
   }
 
   unregister() {
-    this.sendMessage([constants.PROTO_LEAVE, this.props.state.tabId]);
+    this.sendMessage([constants.PROTO_LEAVE, this.state.tabId]);
   }
 
   sendMessage(message) {
@@ -137,9 +139,5 @@ export default class ClientRouter extends Component {
         location,
       },
     ]);
-  }
-
-  render() {
-    return null;
   }
 }

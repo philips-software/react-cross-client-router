@@ -7,9 +7,6 @@ class ClientLink extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
     to: PropTypes.string.isRequired,
-    clientState: PropTypes.shape({
-      tabs: PropTypes.array.isRequired,
-    }).isRequired,
     targetTab: PropTypes.string,
   };
 

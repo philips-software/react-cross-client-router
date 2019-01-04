@@ -38,8 +38,14 @@ class ClientLink extends Component {
 
   render() {
     const { children, to, targetTab } = this.props;
+    const { router } = this.context;
 
-    const scopedHref = `${to}?tabId=${targetTab}`;
+    let scopedHref = `${to}?tabId=${targetTab}`;
+
+    if (router.basename) {
+      scopedHref = `/${router.basename}${scopedHref}`;
+    }
+
     return (
       <a
         href={scopedHref}

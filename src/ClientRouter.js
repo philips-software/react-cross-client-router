@@ -5,12 +5,13 @@ const URL_PARAM = 'tabId';
 const LOCAL_STORAGE_KEY = 'react-cross-tab-router-tabId';
 
 export default class ClientRouter {
-  constructor({ history, channel, storage, onChange }) {
+  constructor({ history, channel, storage, basename, onChange }) {
     this.state = {
       tabId: null,
       tabs: [],
     };
 
+    this.basename = basename;
     this.history = history;
     this.channel = channel;
     this.storage = storage;

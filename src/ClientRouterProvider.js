@@ -22,13 +22,9 @@ class ClientRouterProvider extends Component {
   constructor(props, context) {
     super(props, context);
 
-    const { history, channel, storage } = props;
+    const { children, ...routerProps } = props;
 
-    this.clientRouter = new ClientRouter({
-      history,
-      channel,
-      storage,
-    });
+    this.clientRouter = new ClientRouter(routerProps);
 
     const { tabs, tabId } = this.clientRouter.state;
 

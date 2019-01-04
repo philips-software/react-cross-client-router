@@ -18,6 +18,7 @@ ReactDOM.render(
     <ClientRouterProvider
       channel={new BroadcastChannel('react-cross-tab-router')}
       storage={window.sessionStorage}
+      basename={relativePath}
     >
       <App />
     </ClientRouterProvider>

@@ -64,7 +64,13 @@ pages:
   stage: build
   script:
     - yarn
-    - yarn build-storybook
+    - cd example
+    - PUBLIC_URL="http://jasper-stam.gitlab-pages.ta.philips.com/react-cross-client-router" yarn build
+    - cd ..
+    - rm -rf public
+    - mv example/build public
+    - cp public/index.html public/404.html
+
   artifacts:
     paths:
       - public

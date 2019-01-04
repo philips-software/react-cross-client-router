@@ -43,7 +43,7 @@ class ClientLink extends Component {
     let scopedHref = `${to}?tabId=${targetTab}`;
 
     if (router.basename) {
-      scopedHref = `/${router.basename}${scopedHref}`;
+      scopedHref = `${router.basename}${scopedHref}`;
     }
 
     return (

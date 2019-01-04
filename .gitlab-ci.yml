@@ -66,7 +66,7 @@ pages:
     - yarn
     - cd example
     - yarn
-    - PUBLIC_URL="http://jasper-stam.gitlab-pages.ta.philips.com/react-cross-client-router" yarn build
+    - PUBLIC_URL="http://jasper.stam.gitlab-pages.ta.philips.com/react-cross-client-router" yarn build
     - cd ..
     - rm -rf public
     - mv example/build public
@@ -86,6 +86,9 @@ publish-package:
     paths:
       - ./dist
     expire_in: 1 day
+
+  only:
+    - tags
 
   cache:
     key: "$CI_BUILD_REF"

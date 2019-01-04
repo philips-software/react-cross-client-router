@@ -61,10 +61,11 @@ sonar:
 
 pages:
   image: 'gitlab.ta.philips.com:5432/forest/docker/node-ci:9.11.1'
-  stage: build
+  stage: publish
   script:
     - yarn
     - cd example
+    - yarn
     - PUBLIC_URL="http://jasper-stam.gitlab-pages.ta.philips.com/react-cross-client-router" yarn build
     - cd ..
     - rm -rf public

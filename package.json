@@ -1,6 +1,6 @@
 {
   "name": "react-cross-client-router",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A tool to control React apps spanning multiple tabs, windows or devices",
   "author": "jasper.stam@philips.com",
   "main": "dist/index.js",

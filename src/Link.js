@@ -41,7 +41,12 @@ class ClientLink extends Component {
 
     const scopedHref = `${to}?tabId=${targetTab}`;
     return (
-      <a href={scopedHref} target="_blank" rel="noopener noreferrer" onClick={this.handleClick}>
+      <a
+        href={scopedHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={this.handleClick}
+      >
         {children}
       </a>
     );
@@ -49,5 +54,3 @@ class ClientLink extends Component {
 }
 
 export default ClientLink;
-
-

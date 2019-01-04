@@ -1,22 +1,22 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { withRouter } from "react-router-dom";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 
-import ClientRouter from "./ClientRouter";
+import ClientRouter from './ClientRouter';
 
-export const ClientRouterContext = React.createContext("crossClientRouter");
+export const ClientRouterContext = React.createContext('crossClientRouter');
 
 class ClientRouterProvider extends Component {
   static propTypes = {
     history: PropTypes.shape({
       push: PropTypes.func.isRequired,
-      location: PropTypes.shape({}).isRequired
+      location: PropTypes.shape({}).isRequired,
     }).isRequired,
     storage: PropTypes.shape({}).isRequired,
     channel: PropTypes.shape({
-      postMessage: PropTypes.func.isRequired
+      postMessage: PropTypes.func.isRequired,
     }).isRequired,
-    children: PropTypes.node.isRequired
+    children: PropTypes.node.isRequired,
   };
 
   constructor(props, context) {
@@ -41,16 +41,16 @@ class ClientRouterProvider extends Component {
     this.clientRouter.setChangeListener(this.handleChange);
   }
 
-  handleChange = (state) => {
-    this.setState(state)
-  }
+  handleChange = state => {
+    this.setState(state);
+  };
 
-  handleRef = (router) => {
+  handleRef = router => {
     this.setState({ router });
-  }
+  };
 
   render() {
-    const { children} = this.props;
+    const { children } = this.props;
 
     return (
       <ClientRouterContext.Provider value={this.state}>
@@ -64,9 +64,7 @@ export function withClientRouter(TargetComponent) {
   return function ClientRouterComponent(props) {
     return (
       <ClientRouterContext.Consumer>
-        {contextApi => (
-          <TargetComponent {...props} clientRouter={contextApi} />
-        )}
+        {contextApi => <TargetComponent {...props} clientRouter={contextApi} />}
       </ClientRouterContext.Consumer>
     );
   };

@@ -9,7 +9,7 @@ export default class ClientRouter {
     this.state = {
       tabId: null,
       tabs: [],
-    }
+    };
 
     this.history = history;
     this.channel = channel;
@@ -36,7 +36,6 @@ export default class ClientRouter {
     const { tabs, tabId } = this.state;
     const [type, body] = message;
 
-
     switch (type) {
       case constants.PROTO_JOIN: {
         const newRoomName = body;
@@ -55,7 +54,7 @@ export default class ClientRouter {
         const newRoomName = body;
         if (!tabs.includes(newRoomName)) {
           this.set({
-            tabs: [...tabs, newRoomName]
+            tabs: [...tabs, newRoomName],
           });
         }
         break;
@@ -65,18 +64,18 @@ export default class ClientRouter {
         const targetRoomName = body;
 
         this.set({
-          tabs: tabs.filter((tab) => tab !== targetRoomName)
+          tabs: tabs.filter(tab => tab !== targetRoomName),
         });
 
         break;
       }
 
       case constants.PROTO_OPEN:
-      if (body.targetTab !== tabId) {
+        if (body.targetTab !== tabId) {
+          break;
+        }
+        this.history.push(body.location);
         break;
-      }
-      this.history.push(body.location);
-      break;
 
       default: {
         console.error('Unknown message type', type); /* eslint-disable-line */
@@ -84,12 +83,12 @@ export default class ClientRouter {
     }
   }
 
-  set = (newState) => {
-    this.state = { ...this.state, ...newState};
+  set = newState => {
+    this.state = { ...this.state, ...newState };
     if (this.onChange) {
       this.onChange(this.state);
     }
-  }
+  };
 
   acknowledgeJoin() {
     this.sendMessage([constants.PROTO_ACK_JOIN, this.state.tabId]);
@@ -114,7 +113,7 @@ export default class ClientRouter {
     this.set({
       tabId,
       tabs: [...this.state.tabs, tabId],
-    })
+    });
 
     this.storage.setItem(LOCAL_STORAGE_KEY, tabId);
     this.sendMessage([constants.PROTO_JOIN, tabId]);

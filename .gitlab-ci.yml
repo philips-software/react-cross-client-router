@@ -75,8 +75,6 @@ pages:
   artifacts:
     paths:
       - public
-  only:
-    - tags
 
 publish-package:
   image: 'gitlab.ta.philips.com:5432/forest/docker/node-ci:9.11.1'
@@ -88,9 +86,6 @@ publish-package:
     paths:
       - ./dist
     expire_in: 1 day
-
-  only:
-    - tags
 
   cache:
     key: "$CI_BUILD_REF"

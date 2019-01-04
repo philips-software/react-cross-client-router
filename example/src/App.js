@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, withRouter } from "react-router-dom";
+import { Route } from "react-router-dom";
 import {
   ClientRouterContext,
   ClientLink,
@@ -9,7 +9,7 @@ import {
 const GalleryItem = ({ id }) => (
   <ClientLink targetTab="detail" to={`/detail/${id}`}>
     <img
-      href={`Placeholder with id=${id}`}
+      alt={`Placeholder with id=${id}`}
       src={`https://picsum.photos/250/250?image=${id}`}
     />
   </ClientLink>
@@ -52,7 +52,7 @@ const DetailView = withClientRouter(({ match, clientRouter }) => {
         </ClientLink>
       )}
       <img
-        href={`Detail image with id=${id}`}
+        alt={`Detail image with id=${id}`}
         src={`https://picsum.photos/650/650?image=${id}`}
       />
     </div>

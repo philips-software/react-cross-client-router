@@ -52,7 +52,7 @@ const DetailView = withClientRouter(({ match, clientRouter }) => {
         </ClientLink>
       )}
       <img
-        alt={`Detail image with id=${id}`}
+        alt={`Detail with id=${id}`}
         src={`https://picsum.photos/650/650?image=${id}`}
       />
     </div>

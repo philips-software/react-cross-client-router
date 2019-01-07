@@ -1,3 +1,0 @@
-[submodule "ci/forest"]
-	path = ci/forest
-	url = https://gitlab.ta.philips.com/forest.ui/ci.git

@@ -1,7 +1,6 @@
 # react-cross-client-router
 
-[![NPM](https://img.shields.io/npm/v/react-cross-client-router.svg)](https://www.npmjs.com/package/react-cross-client-router) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
-
+[![NPM](https://img.shields.io/npm/v/react-cross-client-router.svg)](https://www.npmjs.com/package/react-cross-client-router) [![JavaScript Style Guide]
 A tool to control React apps spanning multiple tabs, windows or devices.
 
 Control the tab on your second screen by using your first screen, all without using a server.
@@ -14,7 +13,7 @@ Control the tab on your second screen by using your first screen, all without us
 - Channel agnostic:
   - Uses broadcast-channel for a frontend-only implementation
   - Supports websockets to control apps spanning multiple devices.
-- Uses location.history to control tabs, compatible with react-router-dom
+- Uses the url to control tabs, dependent on react-router-dom
 - Keeps track of active tabs, detects when tabs quit.
 - Tab IDs are persistent.
 

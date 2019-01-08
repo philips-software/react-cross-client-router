@@ -15,7 +15,7 @@ Control the tab on your second screen by using your first screen, all without us
 - Channel agnostic:
   - Uses broadcast-channel for a frontend-only implementation
   - Supports websockets to control apps spanning multiple devices.
-- Uses the url to control tabs, dependent on react-router-dom
+- Uses the url to control tabs, dependent on `react-router-dom`
 - Keeps track of active tabs, detects when tabs quit.
 - Tab IDs are persistent.
 
@@ -60,13 +60,14 @@ ReactDOM.render(
     </ClientRouterProvider>
   </BrowserRouter>,
   document.getElementById('root')
-);
+)
 ```
 
 ### App
 
 ```jsx
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import { Route } from 'react-router-dom'
 import {
   ClientRouterContext
 } from 'react-cross-client-router'
@@ -83,14 +84,16 @@ class App extends Component {
         <h1>react-cross-client-router example</h1>
         <div>
           <p>Tab name: {clientRouter.tabId}</p>
-          <p>Connected tabs: {clientRouter.tabs.join(", ")}</p>
+          <p>Connected tabs: {clientRouter.tabs.join(', ')}</p>
         </div>
-        <Route path="/" exact component={Master} />
-        <Route path="/detail/:id" component={Detail} />
+        <Route path='/' exact component={Master} />
+        <Route path='/detail/:id' component={Detail} />
       </div>
     );
   }
 }
+
+export { App }
 ```
 
 ### Master
@@ -105,7 +108,7 @@ import {
 const Master = withClientRouter(({ clientRouter }) => {
   return (
     <div>
-      {clientRouter.tabs.includes("detail") ? (
+      {clientRouter.tabs.includes('detail') ? (
         <h2>
           The detail view tab exists, click an detail link to update
           the content of the detail view...
@@ -113,10 +116,10 @@ const Master = withClientRouter(({ clientRouter }) => {
       ) : (
         <h2>Click one of the links below to open the corresponding detail view in the new tab</h2>
       )}
-      <ClientLink targetTab="detail" to={`/detail/1`}>
+      <ClientLink targetTab='detail' to={'/detail/1'}>
         Detail View 1
       </ClientLink>
-      <ClientLink targetTab="detail" to={`/detail/2`}>
+      <ClientLink targetTab='detail' to={'/detail/2'}>
         Detail View 2
       </ClientLink>
     </div>
@@ -139,8 +142,8 @@ const Detail = withClientRouter(({ match, clientRouter }) => {
   const id = match.params.id
   return (
     <div>
-      {!clientRouter.tabs.includes("parent") && (
-        <ClientLink targetTab="parent" to="/">
+      {!clientRouter.tabs.includes('parent') && (
+        <ClientLink targetTab='parent' to='/'>
           <h2>The parent tab seems to be closed, click here to reopen it.</h2>
         </ClientLink>
       )}

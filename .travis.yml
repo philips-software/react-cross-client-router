@@ -5,3 +5,9 @@ node_js:
 script:
   - yarn lint
   - yarn test
+deploy:
+  provider: npm
+  email: jasper@strnk.nl
+  on:
+    tags: true
+    branch: master

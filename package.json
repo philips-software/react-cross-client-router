@@ -2,7 +2,15 @@
   "name": "react-cross-client-router",
   "version": "1.0.2",
   "description": "A tool to control React apps spanning multiple tabs, windows or devices",
+  "license": "MIT",
   "author": "jasper.stam@philips.com",
+  "repository": "philips-software/react-cross-client-router",
+  "keywords": [
+    "react",
+    "react-router",
+    "cross-device",
+    "cross-tab"
+  ],
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",

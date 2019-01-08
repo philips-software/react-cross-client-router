@@ -1,13 +1,15 @@
 language: node_js
 cache: yarn
 node_js:
-  - 8
+- 8
 script:
-  - yarn lint
-  - yarn test
+- yarn lint
+- yarn test
 deploy:
   provider: npm
   email: jasper@strnk.nl
+  api_key:
+    secure: BxpR5w0RzSRKucTRy36ythvgiaESWDKXWNC2O/N6JICIUUTV0+RSCyT0UgK0B+YLHWYzgDQNgFfgujTQCodrEeiTyAHW5d4D4WJZGyH5Q/DZ7LFv0e7Gq3Qbd00EKAXNXsAgIa/OXFjPiN5wpgfyYad5uLlN1iGUeGDlkxKj0Eg4XDRAJKBADdkJaPzarKF28BBzlzpR/cl5iFHTvpn5gHjmVm0oWgpwiPqs5AZ6BDuXU8lkmRSO8hIvnGJxWp+v0GhnGUfd/IjOG5iqyXHTzlkS6C/9stM8prwa21L57B4SyBZiK9AfF1DOG+GB1dmuBcZKWUWPIcCP4SSlV5BpYbnsj+oy+6o2ifL1F5jQ4JOZiIe2Q3LNzi2W4WkuuRpx1RGZIOvtJbosr5hihswe9GCkI1XgTol4KViQbS7VVyAL792KVoLDy4EFoB4Jv5RUh4pspHC1FRREQyr460IpqgTOCIJBaiqIsu+N9RZRAMDf1v/FqQln86a8lwcMHeJvo2dNRWVI3Y7FRUqvzgQQyq3cD1kCnEkHDheQmMgF2LH/yOO7uniZn0fcCoGWjjdf2yGBi+EdKElsBV1tdvwmQFvTWFUDU4L490MIUaZkojIdE3wb7YeNKXO4LoJeB7SLFBDFU29NGHn7ywqxpRvdXdZ4Tix8NZG/euwEcKvKWPE=
   on:
     tags: true
     branch: master

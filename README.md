@@ -1,6 +1,7 @@
 # react-cross-client-router
 
 [![NPM](https://img.shields.io/npm/v/react-cross-client-router.svg)](https://www.npmjs.com/package/react-cross-client-router)
+[![Build Status](https://travis-ci.com/philips-software/react-cross-client-router.svg?branch=master)](https://travis-ci.com/philips-software/react-cross-client-router)
 
 A tool to control React apps spanning multiple tabs, windows or devices.
 
@@ -20,7 +21,7 @@ Control the tab on your second screen by using your first screen, all without us
 
 ## Demo
 
-![alt text](demo/screencast.gif "React cross client router example screencast")
+![React cross client router example screencast](https://raw.githubusercontent.com/philips-software/react-cross-client-router/master/demo/screencast.gif)
 
 ## Install
 

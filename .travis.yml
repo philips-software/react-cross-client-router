@@ -6,6 +6,7 @@ script:
 - yarn lint
 - yarn test
 deploy:
+  skip_cleanup: true
   provider: npm
   email: jasper@strnk.nl
   api_key:

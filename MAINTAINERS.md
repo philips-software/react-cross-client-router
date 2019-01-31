@@ -1,3 +1,5 @@
 Jasper Stam <jasper.stam@philips.com>
 
-Marcin Czenko <marcin.czenko@philips.com>
+Patrick Mennen <patrick.mennen@philips.com>
+
+Jeroen Knoops <jeroen.knoops@philips.com>

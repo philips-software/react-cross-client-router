@@ -15,8 +15,6 @@ class ClientLink extends Component {
     targetTab: constants.CHILD_NAME,
   };
 
-  static contextType = ClientRouterContext;
-
   handleClick = e => {
     const { targetTab, to } = this.props;
     const { tabs, tabId, router } = this.context;
@@ -35,6 +33,8 @@ class ClientLink extends Component {
 
     router.redirectTargetTab(targetTab, to);
   };
+
+  static contextType = ClientRouterContext;
 
   render() {
     const { children, to, targetTab } = this.props;

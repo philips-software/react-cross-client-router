@@ -15,7 +15,7 @@ updates:
     schedule:
       interval: "daily"
 
-- package-ecosystem: "npm"
+  - package-ecosystem: "npm"
     # Look for `package.json` and `lock` files in the `example` directory
     directory: "/example"
     # Check the npm registry for updates every day (weekdays)

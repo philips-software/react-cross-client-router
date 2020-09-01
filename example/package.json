@@ -7,7 +7,7 @@
     "broadcast-channel": "^2.1.8",
     "history": "^4.7.2",
     "prop-types": "^15.6.2",
-    "react": "^16.4.1",
+    "react": "^16.13.1",
     "react-cross-client-router": "link:..",
     "react-dom": "^16.4.1",
     "react-router-dom": "^4.3.1",

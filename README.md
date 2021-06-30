@@ -1,7 +1,7 @@
 # react-cross-client-router
 
 [![NPM](https://img.shields.io/npm/v/react-cross-client-router.svg)](https://www.npmjs.com/package/react-cross-client-router)
-[![Build Status](https://travis-ci.com/philips-software/react-cross-client-router.svg?branch=master)](https://travis-ci.com/philips-software/react-cross-client-router)
+[![Build Status](https://github.com/philips-software/react-cross-client-router/actions/workflows/node.js.yml/badge.svg)](https://github.com/philips-software/react-cross-client-router/actions/workflows/node.js.yml)
 
 A tool to control React apps spanning multiple tabs, windows or devices.
 

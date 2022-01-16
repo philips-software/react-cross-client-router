@@ -11,7 +11,7 @@
     "react-cross-client-router": "link:..",
     "react-dom": "^16.4.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^1.1.4"
+    "react-scripts": "^5.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
